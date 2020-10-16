@@ -468,6 +468,10 @@ app.patch('/foods',
 app.get("/say", (req,res)=>{
 let k= req.query.keyword;
     console.log("keyword: ",k);
+if (k === undefined || k.length ==0) {
+	res.status(404).json({"status":"keyword passed as param is not valid"});
+}
+else{
 axios
     .get('https://izjf2prqya.execute-api.us-east-1.amazonaws.com/dev/say-endpoint',{
       params:{
@@ -476,6 +480,10 @@ axios
     })
     .then(response=>res.json(response.data))
     .catch(err=> console.log(err));
+}
+
+
+
 });
 
 
